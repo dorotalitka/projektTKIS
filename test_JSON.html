@@ -8,18 +8,24 @@
 <p id="demo"></p>
 
 <script>
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const BaseStation = urlParams.get('BaseStation')
+
+document.getElementById("demo").innerHTML+=BaseStation+'<br><br>';
+  
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var myObj = JSON.parse(this.responseText);
-    for (my_date in myObj.bydg)
+    for (my_data in myObj.punkt)
     {
                                         
-    document.getElementById("demo").innerHTML += (myObj.bydg[my_date].yyyy + ' '+myObj.bydg[my_date].__east + ' '+myObj.bydg[my_date]._north + ' '+myObj.bydg[my_date].____up  + '<br>');
+    document.getElementById("demo").innerHTML += (myObj.punkt[my_data].yyyy + ' '+myObj.punkt[my_data].__east + ' '+myObj.punkt[my_data]._north + ' '+myObj.punkt[my_data].____up  + '<br>');
     }
   }
 };
-xmlhttp.open("GET", "http://localhost:8080/data/BYDG.json", false);
+xmlhttp.open("GET", "http://localhost:8080/Apps/projektTKIS-main/data/"+BaseStation+".json", false);
 xmlhttp.send();
 </script>
 
