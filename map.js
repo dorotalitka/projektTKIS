@@ -19,7 +19,7 @@ addMarker(new OpenLayers.LonLat(17.073,52.277).transform(
 addMarker(new OpenLayers.LonLat(23.127,52.035).transform(
             geographic, mercator),"Stacja: BPDL Miejscowość: Biała Podlaska wykres");
 addMarker(new OpenLayers.LonLat(17.994,53.135).transform(
-            geographic, mercator),"Stacja: BYDG Miejscowość: Bydgoszcz wykres");
+            geographic, mercator),"Stacja: BYDG Miejscowość: Bydgoszcz </p>" + '<a href="https://github.com">' + "Wykresy");
 addMarker(new OpenLayers.LonLat(15.246,52.733).transform(
             geographic, mercator),"Stacja: GORZ Miejscowość: Gorzów Wielkopolski wykres");
 addMarker(new OpenLayers.LonLat(21.032,52.097).transform(
