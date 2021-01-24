@@ -19,7 +19,7 @@ addMarker(new OpenLayers.LonLat(17.073,52.277).transform(
 addMarker(new OpenLayers.LonLat(23.127,52.035).transform(
             geographic, mercator),"Stacja: BPDL Miejscowość: Biała Podlaska wykres");
 addMarker(new OpenLayers.LonLat(17.994,53.135).transform(
-            geographic, mercator),"Stacja: BYDG Miejscowość: Bydgoszcz </p>" + '<a href="test_JSON.html?BaseStation=BYDG" >' + "Wykresy");
+            geographic, mercator),"Stacja: BYDG Miejscowość: Bydgoszcz </p>" + '<a href="wykres.html?BaseStation=BYDG" >' + "Wykresy");
 addMarker(new OpenLayers.LonLat(15.246,52.733).transform(
             geographic, mercator),"Stacja: GORZ Miejscowość: Gorzów Wielkopolski wykres");
 addMarker(new OpenLayers.LonLat(21.032,52.097).transform(
@@ -31,7 +31,7 @@ addMarker(new OpenLayers.LonLat(19.920,50.066).transform(
 addMarker(new OpenLayers.LonLat(20.670,53.892).transform(
             geographic, mercator),"Stacja: LAMA Miejscowość: Lamkówko wykres");
 addMarker(new OpenLayers.LonLat(19.460,51.779).transform(
-            geographic, mercator),"Stacja: LODZ Miejscowość: Łódź </p>" + '<a href="test_JSON.html?BaseStation=LODZ" >' + "Wykresy");
+            geographic, mercator),"Stacja: LODZ Miejscowość: Łódź </p>" + '<a href="wykres.html?BaseStation=LODZ" >' + "Wykresy");
 addMarker(new OpenLayers.LonLat(22.922,51.631).transform(
             geographic, mercator),"Stacja: PRCZ Miejscowość: Parczew wykres");
 addMarker(new OpenLayers.LonLat(17.118,54.472).transform(

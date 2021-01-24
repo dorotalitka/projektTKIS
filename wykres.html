@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script src="Chart.bundle.js"></script>
+<script src="Chart.bundle.min.js"></script>
+
+<canvas id="myChartEast" width="16" height="5"></canvas>
+<br />
+<br />
+<canvas id="myChartNorth" width="16" height="5"></canvas>
+<canvas id="myChartUp" width="16" height="5"></canvas>
+<br />
+<br />
+
+<script>
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const BaseStation = urlParams.get('BaseStation')
+
+// zmienne dla tabel
+    var time = [];
+    var east = [];
+    var north = [];
+    var up = [];
+    var E_lin = [];
+    var E_pol = [];
+    var E_rok = [];
+    var N_lin = [];
+    var N_pol = [];
+    var N_rok = [];
+    var V_lin = [];
+    var V_pol = [];
+    var V_rok = [];
+
+  
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var myObj = JSON.parse(this.responseText);
+    for (my_data in myObj.punkt)
+    {
+        time.push(myObj.punkt[my_data].yyyy);
+        east.push(myObj.punkt[my_data].__east);
+        north.push(myObj.punkt[my_data]._north);
+        up.push(myObj.punkt[my_data].____up);
+    }
+  }
+};
+xmlhttp.open("GET", "http://localhost:8080/Apps/projektTKIS-main/data/"+BaseStation+".json", false);
+xmlhttp.send();
+
+var xmlhttp2 = new XMLHttpRequest();
+xmlhttp2.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var myObj = JSON.parse(this.responseText);
+    for (my_data in myObj.trend)
+    {
+        E_lin.push(myObj.trend[my_data].E_liniowy);
+        E_pol.push(myObj.trend[my_data].E_polrocz);
+        E_rok.push(myObj.trend[my_data].E_roczny);
+        N_lin.push(myObj.trend[my_data].N_liniowy);
+        N_pol.push(myObj.trend[my_data].N_polroc);
+        N_rok.push(myObj.trend[my_data].N_roczny);
+        V_lin.push(myObj.trend[my_data].V_liniowy);
+        V_pol.push(myObj.trend[my_data].V_polroczny);
+        V_rok.push(myObj.trend[my_data].V_roczny);
+    }
+  }
+};
+xmlhttp2.open("GET", "http://localhost:8080/Apps/projektTKIS-main/data/"+BaseStation+"_trends.json", false);
+xmlhttp2.send();
+
+
+    var ctx = document.getElementById('myChartEast').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: time,
+            datasets: [
+                {
+                    label: BaseStation + ' (east)',
+                    data: east,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                },
+                {
+                    label: BaseStation + ' (east) - trend liniowy',
+                    data: E_lin,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: 'rgba(255, 0, 0, 0.3)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                    hidden: true,
+                },
+                {
+                    label: BaseStation + ' (east) - trend polroczny',
+                    data: E_pol,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: 'rgba(0, 255, 0, 0.3)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                    hidden: true,
+                },
+                {
+                    label: BaseStation + ' (east) - trend roczny',
+                    data: E_rok,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: 'rgba(0, 0, 255, 0.3)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                    hidden: true,
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 20
+                }
+            },
+        }
+    });
+
+    var ctx2 = document.getElementById('myChartNorth').getContext('2d');
+    var myChart2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: time,
+            datasets: [
+                {
+                    label: BaseStation + ' (north)',
+                    data: north,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                },
+                {
+                    label: BaseStation + ' (north) - trend liniowy',
+                    data: N_lin,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: 'rgba(255, 0, 0, 0.3)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                    hidden: true,
+                },
+                {
+                    label: BaseStation + ' (north) - trend polroczny',
+                    data: N_pol,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: 'rgba(0, 255, 0, 0.3)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                    hidden: true,
+                },
+                {
+                    label: BaseStation + ' (north) - trend roczny',
+                    data: N_rok,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: 'rgba(0, 0, 255, 0.3)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                    hidden: true,
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+        }
+    });
+
+    var ctx3 = document.getElementById('myChartUp').getContext('2d');
+    var myChar32 = new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: time,
+            datasets: [
+                {
+                    label: BaseStation + ' (up)',
+                    data: up,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                },
+                {
+                    label: BaseStation + ' (up) - trend liniowy',
+                    data: V_lin,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: 'rgba(255, 0, 0, 0.3)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                    hidden: true,
+                },
+                {
+                    label: BaseStation + ' (up) - trend polroczny',
+                    data: V_pol,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: 'rgba(0, 255, 0, 0.3)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                    hidden: true,
+                },
+                {
+                    label: BaseStation + ' (up) - trend roczny',
+                    data: V_rok,
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderColor: 'rgba(0, 0, 255, 0.3)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                    hidden: true,
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+        }
+    });
+
+</script>
+
+
+</body>
+</html>
